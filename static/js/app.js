@@ -60,30 +60,37 @@ function buildCharts(sample) {
 // Function to run on page load
 function init() {
   d3.json("https://static.bc-edx.com/data/dl-1-2/m14/lms/starter/samples.json").then((data) => {
+    console.log("Data loaded on init:", data);
 
     // Get the names field
-
+    let names = data.names;
+    console.log("Sample names:", names);
 
     // Use d3 to select the dropdown with id of `#selDataset`
-
+    let dropdown = d3.select("#selDataset");
 
     // Use the list of sample names to populate the select options
-    // Hint: Inside a loop, you will need to use d3 to append a new
-    // option for each sample name.
-
+    names.forEach(name => {
+      console.log("Appending name to dropdown:", name);
+      dropdown.append("option").text(name).property("value", name);
+    });
 
     // Get the first sample from the list
-
+    let firstSample = names[0];
+    console.log("First sample:", firstSample);
 
     // Build charts and metadata panel with the first sample
-
+    buildCharts(firstSample);
+    buildMetadata(firstSample);
   });
 }
 
 // Function for event listener
 function optionChanged(newSample) {
+  console.log("New sample selected:", newSample);
   // Build charts and metadata panel each time a new sample is selected
-
+  buildCharts(newSample);
+  buildMetadata(newSample);
 }
 
 // Initialize the dashboard
