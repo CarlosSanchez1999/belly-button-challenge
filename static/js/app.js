@@ -100,7 +100,6 @@ function init() {
 
     // Use the list of sample names to populate the select options
     names.forEach(name => {
-      console.log("Appending name to dropdown:", name);
       dropdown.append("option").text(name).property("value", name);
     });
 
